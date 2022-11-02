@@ -1,6 +1,16 @@
-import type { AppType } from 'next/app';
+import { DehydratedState, Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import type { AppProps, AppType } from 'next/app';
+import { useState } from 'react';
 import { trpc } from '../utils/trpc';
-const MyApp: AppType = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
+
+function App({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedState }>) {
+  const [queryClient] = useState(() => new QueryClient())
+  return (
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <Component {...pageProps} />
+        </Hydrate>
+      </QueryClientProvider>
+    )
 };
-export default trpc.withTRPC(MyApp);
+export default trpc.withTRPC(App);
