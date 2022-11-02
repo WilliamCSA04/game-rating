@@ -2,6 +2,7 @@ import { DehydratedState, Hydrate, QueryClient, QueryClientProvider } from '@tan
 import type { AppProps, AppType } from 'next/app';
 import { useState } from 'react';
 import { trpc } from '../utils/trpc';
+import '../styles/globals.css'
 
 function App({ Component, pageProps }: AppProps<{ dehydratedState: DehydratedState }>) {
   const [queryClient] = useState(() => new QueryClient())
