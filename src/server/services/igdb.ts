@@ -10,6 +10,9 @@ type GetGamesType = {
 }
 
 type GameType = {
+    artworks?: number[],
+    cover?: number,
+    screenshots?: number[],
     id: number,
     category: number,
     created_at: number,
@@ -22,6 +25,6 @@ type GameType = {
   }
 
 export async function getGames({ clientId, authorization }: GetGamesType) {
-    const data = await fetch(GAMES_API, { method: 'post', headers: { 'Client-ID': clientId, Authorization: authorization }, body: 'fields *; limit 10;' })
+    const data = await fetch(GAMES_API, { method: 'post', headers: { 'Client-ID': clientId, Authorization: authorization }, body: 'fields *; limit 10; sort rating desc;' })
     return handleResponse<GameType[]>(data)
 }
