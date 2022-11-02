@@ -6,7 +6,7 @@ import { TRPCError, initTRPC } from '@trpc/server';
 type TRPCContext = {
     session?: {
         user?: {
-            email: string
+          email: string
         }
     }
 }
